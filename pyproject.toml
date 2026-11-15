@@ -1,0 +1,26 @@
+[project]
+name = "cracklens"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Tejas", email = "137335372+Tru735@users.noreply.github.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.163.1",
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.4",
+    "onnxruntime>=1.32.0",
+    "pathlib>=1.0.1",
+    "pillow>=13.0.0",
+    "torch>=2.15.0",
+    "torchvision>=0.29.2",
+]
+
+[project.scripts]
+cracklens = "cracklens:main"
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
