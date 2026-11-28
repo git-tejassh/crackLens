@@ -30,7 +30,7 @@ def _check_inputs(gt, pred):
 
 #cutoff above which to consider the value as mask or background
 CUTOFF = 0.5
-def iou(gt_bool : list[bool], pred_bool: list[bool]) -> float:
+def iou(gt_bool: np.ndarray, pred_bool: np.ndarray) -> float:
     '''
     Calculate the intersection over union between ground truth and predicted values. 
     The score measures how much the two inputs overlap relative to their combined area.
@@ -46,8 +46,7 @@ def iou(gt_bool : list[bool], pred_bool: list[bool]) -> float:
     
 
     _check_inputs(gt_bool, pred_bool)
-    intersection = (gt_bool & pred_bool).sum()
-    union = (gt_bool | pred_bool).sum()
+
 
     intersection = np.logical_and(gt_bool, pred_bool).sum()
     union = np.logical_or(gt_bool, pred_bool).sum()
@@ -56,7 +55,7 @@ def iou(gt_bool : list[bool], pred_bool: list[bool]) -> float:
 
 
     
-def precision_recall_f1(gt_bool: list[bool], pred_bool: list[bool]) -> float:
+def precision_recall_f1(gt_bool: np.ndarray, pred_bool: np.ndarray) -> float:
     ''' 
     Calculate the precision of predicted values against ground truth values. The score measures the proportion of positive predictions that are correct.
 
@@ -100,7 +99,7 @@ def precision_recall_f1(gt_bool: list[bool], pred_bool: list[bool]) -> float:
 #     return criterion(pred, gt)
     
 
-def centerline_iou(gt_bool: list[bool], pred_bool: list[bool], smooth: float = 1e-6, tolerance = 4) -> float:
+def centerline_iou(gt_bool: np.ndarray, pred_bool: np.ndarray, smooth: float = 1e-6, tolerance = 4) -> float:
     ''' 
     Calculate a connectivity-aware intersection-over-union score for ground truth and predicted values. The score measures their overlap while accounting for the connectivity of the structures.
     It measures the overlap between ground truth centerline and predicted centerline, with a tolerance of 4px otherwise the skeleton is only 1px wide.
